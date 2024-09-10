@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coolio Cat - Champion Mouser</title>
+</head>
+
+<body>
+    <header>
+        <h1>Coolio Cat</h1>
+        <h2>Champion Mouser</h2>
+        <p>Coolio Cat is a champion mouser with a sharp instinct for hunting and a keen sense of smell.</p>
+        <img src="data:image/jpeg;base64,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" alt="Coolio Cat" width="300" height="200">
+    </header>
+
+    <hr>
+
+    <section>
+        <h2>Work Experience</h2>
+
+        <article>
+            <h3>Senior Mouser at Whisker Enterprises</h3>
+            <p>2019 - 2023</p>
+            <p>Led a team of junior mousers and achieved a 99% reduction in rodent-related incidents.</p>
+        </article>
+
+        <article>
+            <h3>Mouser at Paw Patrol Inc.</h3>
+            <p>2015 - 2019</p>
+            <p>Captured over 100 rodents in the first year.</p>
+        </article>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Education</h2>
+
+        <article>
+            <h3>Feline University</h3>
+            <p>B.A. in Rodentology, 2011 - 2015</p>
+        </article>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Skills</h2>
+        <ul>
+            <li>Rodent Tracking</li>
+            <li>Stealth Movement</li>
+            <li>Night Vision</li>
+        </ul>
+    </section>
+
+    <hr>
+
+    <footer>
+        <p>Email: coolio.cat@mousermail.com</p>
+        <p>Phone: (123) 456-7890</p>
+        <p>Address: 123 Feline Lane, Cat City, CA 98765</p>
+        <p>&copy; 2024 Coolio Cat</p>
+    </footer>
+
+    <hr>
+
+    <section>
+        <h2>In-Class Work</h2>
+        <button onclick="window.location.href='https://ramizoor.github.io/zappy.html'">View In-Class Work</button>
+    </section>
+</body>
+
+</html>
+
