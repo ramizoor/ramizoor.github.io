@@ -88,8 +88,11 @@ const tableData = [
     { name: "Donna Snider", position: "Customer Support", office: "New York", age: 27, startDate: "2011/01/25", salary: "$112,000" }
 ];
 
+
+// Age range filter form submission
 document.getElementById("ageRangeForm").addEventListener("submit", function (event) {
     event.preventDefault();
+    
     const minAge = parseInt(document.getElementById("minAge").value, 10);
     const maxAge = parseInt(document.getElementById("maxAge").value, 10);
 
@@ -98,7 +101,8 @@ document.getElementById("ageRangeForm").addEventListener("submit", function (eve
         return;
     }
 
-    const filteredData = tableData.filter(row => row.age >= minAge && row.age <= maxAge);
+    // Filter data based on the selected age range
+    filteredData = tableData.filter(row => row.age >= minAge && row.age <= maxAge);
     const entryCount = filteredData.length;
 
     if (entryCount === 0) {
@@ -106,12 +110,58 @@ document.getElementById("ageRangeForm").addEventListener("submit", function (eve
         return;
     }
 
+    // Calculate the total and average salary
     const totalSalary = filteredData.reduce((sum, row) => {
         return sum + parseFloat(row.salary.replace(/[$,]/g, ""));
     }, 0);
 
     const averageSalary = (totalSalary / entryCount).toFixed(2);
-
     document.getElementById("averageSalary").textContent = 
         `Number of Entries: ${entryCount}, Average Salary: $${averageSalary}`;
+
+    // Display a random person in the success card
+    displayRandomPerson(filteredData);
+});
+
+// Function to display a random person from the filtered data in the Success Card
+function displayRandomPerson(data) {
+    if (data.length === 0) return;  // Ensure there's data to select from
+
+    // Pick a random person from the filtered data
+    const randomPerson = data[Math.floor(Math.random() * data.length)];
+
+    // Create HTML for displaying the random person's information
+    const personInfoHTML = `
+        <p><strong>Name:</strong> ${randomPerson.name}</p>
+        <p><strong>Position:</strong> ${randomPerson.position}</p>
+        <p><strong>Office:</strong> ${randomPerson.office}</p>
+        <p><strong>Age:</strong> ${randomPerson.age}</p>
+        <p><strong>Start date:</strong> ${randomPerson.startDate}</p>
+        <p><strong>Salary:</strong> ${randomPerson.salary}</p>
+    `;
+    
+    // Insert the information into the Success Card
+    document.getElementById('randomPersonInfo').innerHTML = personInfoHTML;
+}
+
+// Initialize the DataTable (original setup)
+window.addEventListener('DOMContentLoaded', event => {
+    const tableBody = document.querySelector("#datatablesSimple tbody");
+
+    // Clear existing rows
+    tableBody.innerHTML = "";
+
+    // Populate the table with data
+    tableData.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${row.name}</td>
+            <td>${row.position}</td>
+            <td>${row.office}</td>
+            <td>${row.age}</td>
+            <td>${row.startDate}</td>
+            <td>${row.salary}</td>
+        `;
+        tableBody.appendChild(tr);
+    }); 
 });
