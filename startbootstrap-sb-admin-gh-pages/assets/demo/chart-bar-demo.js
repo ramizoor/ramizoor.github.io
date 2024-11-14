@@ -2,49 +2,48 @@
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
-// Function to fetch the count of cats for a particular tag
-async function fetchCatCount(tag) {
+async function fetchData(tag) {
   try {
-    const response = await fetch(`https://cataas.com/api/cats?tag=${tag}`);
-    const data = await response.json();
-    console.log(`Fetched ${data.length} cats for tag: ${tag}`);
-    return data.length; // Returns the number of cats with the specified tag
-  } catch (error) {
-    console.error('Error fetching tag data:', tag, error);
-    return 0; // Return 0 if there's an error fetching data
+    const response = await fetch(`https://cataas.com/api/cats?tags=${tag}`); 
+    if (!response.ok) {
+      throw new Error("ERROR");
+    }
+
+    const data = await response.json();    
+    return data.length;                    
+  }
+  catch (error) {
+    alert("ERROR: " + error.message);
   }
 }
 
-// Bar Chart Example
-var ctx = document.getElementById("myBarChart");
-
 async function createChart() {
-  // Fetch the number of cats for each tag
-  const Cute = await fetchCatCount("Cute");
-  const Orange = await fetchCatCount("Orange");
-  const Fluffy = await fetchCatCount("Fluffy");
-  const Sleepy = await fetchCatCount("Sleepy");
-  const Silly = await fetchCatCount("Silly");
-  const Bread = await fetchCatCount("Bread");
 
-  // Check if data is being fetched properly (this will print in the browser's console)
-  console.log('Fetched Data:', { Cute, Orange, Fluffy, Sleepy, Silly, Bread });
+  Cute = await fetchData("cute");
+  Orange = await fetchData("orange");
+  Fluffy = await fetchData("fluffy");
+  Sleepy = await fetchData("sleepy");
+  Silly = await fetchData("silly");
+  Bread = await fetchData("bread");
 
-  // Bar Chart Example with fetched data
-  var myBarChart = new Chart(ctx, {
+  var ctx = document.getElementById("myBarChart");
+  var myLineChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ["Cute", "Orange", "Fluffy", "Sleepy", "Silly", "Bread"], // Labels for the categories
+      labels: [Cute, Orange, Fluffy, Sleepy, Silly, Bread],
       datasets: [{
-        label: "Number of Cats", // Label for the dataset
-        backgroundColor: "rgba(2,117,216,1)", // Bar color
-        borderColor: "rgba(2,117,216,1)", // Border color
-        data: [Cute, Orange, Fluffy, Sleepy, Silly, Bread], // Dynamic data from the API
+        label: "Revenue",
+        backgroundColor: "rgba(2,117,216,1)",
+        borderColor: "rgba(2,117,216,1)",
+        data: [Cute, Orange, Fluffy, Sleepy, Silly, Bread],
       }],
     },
     options: {
       scales: {
         xAxes: [{
+          time: {
+            unit: 'month'
+          },
           gridLines: {
             display: false
           },
@@ -55,7 +54,7 @@ async function createChart() {
         yAxes: [{
           ticks: {
             min: 0,
-            max: 2000, // Max value for Y axis (adjust as needed)
+            max: 20,
             maxTicksLimit: 5
           },
           gridLines: {
@@ -64,11 +63,9 @@ async function createChart() {
         }],
       },
       legend: {
-        display: false // Hide the legend
+        display: false
       }
     }
   });
 }
-
-// Ensure the chart is created once the page is ready and the data is fetched
 createChart();
